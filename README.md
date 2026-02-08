@@ -1,62 +1,83 @@
 # Semiconductor Defect Classification Pipeline
 
-This repository contains an end-to-end pipeline for classifying semiconductor wafer defects using the `LSWMD.pkl` dataset. The pipeline preprocesses the data, trains a MobileNetV3-Small model, evaluates performance, and exports an ONNX model for inference.
+This repository contains an end-to-end deep learning pipeline for classifying semiconductor wafer defects using the **WM-811K (LSWMD)** dataset. The pipeline handles data preprocessing, model training using **MobileNetV3-Small**, performance evaluation, and exporting the trained model to **ONNX** format for efficient inference.
+
+## Features
+
+*   **Automated Data Pipeline**: Handles loading the legacy pickle dataset, preprocessing wafer maps, and generating dataset splits (Train/Val/Test).
+*   **Deep Learning Model**: Utilizes a pre-trained **MobileNetV3-Small** architecture fine-tuned for 8-class defect classification.
+*   **Performance Evaluation**: Generates detailed classification reports, confusion matrices, and loss/accuracy plots.
+*   **ONNX Export**: Automatically exports the trained PyTorch model to ONNX for optimized deployment.
+*   **Inference Script**: Includes a standalone script `run_inference.py` for testing the model on single images.
+
+## Project Structure
+
+```
+├── LSWMD.pkl/             # Directory containing the dataset file
+│   └── LSWMD.pkl          # The raw pickle dataset (WM-811K)
+├── output/                # Generated artifacts (created automatically)
+│   ├── Dataset/           # Processed images (Train/Validation/Test)
+│   ├── models/            # Saved PyTorch (.pth) and ONNX (.onnx) models
+│   └── results/           # Logs, metrics, and confusion matrix plots
+├── train_lswmd_mobilenetv3_onnx.py  # Main pipeline script
+├── run_inference.py       # Inference script for individual images
+└── README.md              # Project documentation
+```
 
 ## Prerequisites
 
-Ensure you practice the following steps before running the script:
-
-1.  **Python 3.7+** installed.
-2.  **LSWMD.pkl** file located at the configured path (script expects it inside a folder named `LSWMD.pkl` in the current directory, or adjust `DATA_PKL_PATH` in the script).
+*   **Python 3.7+**
+*   **Dataset**: The `LSWMD.pkl` file must be present. The script expects it at `LSWMD.pkl/LSWMD.pkl` relative to the project root (or update `DATA_PKL_PATH` in `train_lswmd_mobilenetv3_onnx.py`).
 
 ## Installation
 
-Install the required Python packages:
+1.  **Clone the repository** (if applicable) or navigate to the project directory.
 
-```bash
-py -m pip install numpy pandas opencv-python torch torchvision scikit-learn matplotlib seaborn onnx onnxruntime tqdm pillow
-```
+2.  **Install dependencies**:
+    ```bash
+    pip install numpy pandas opencv-python torch torchvision scikit-learn matplotlib seaborn onnx onnxruntime tqdm pillow
+    ```
 
 ## Usage
 
-Run the single script to execute the entire pipeline:
+### 1. Training the Model
+
+Run the main script to execute the entire pipeline (Preprocessing -> Training -> Evaluation -> Export):
 
 ```bash
-py train_lswmd_mobilenetv3_onnx.py
+python train_lswmd_mobilenetv3_onnx.py
 ```
 
-## Pipeline Steps
+*   **Note**: The first run will process the raw `LSWMD.pkl` file and generate thousands of images in the `output/Dataset` directory. This may take some time. Subsequent runs will detect the existing dataset and skip this step.
 
-1.  **Data Loading**: Reads `LSWMD.pkl`.
-2.  **Preprocessing**:
-    *   Extracts wafer maps and labels.
-    *   Maps labels to 8 classes: `clean`, `other`, `center`, `donut`, `edge_loc`, `edge_ring`, `loc`, `scratch`.
-    *   Filters invalid/corrupt maps.
-    *   Converts maps to 224x224 grayscale images (saved as PNG).
-    *   Splits data into Train (70%), Validation (15%), Test (15%).
-3.  **Training**:
-    *   Model: MobileNetV3-Small (pretrained backbone).
-    *   Optimizer: Adam (lr=3e-4).
-    *   Loss: CrossEntropyLoss.
-    *   Epochs: 8.
-4.  **Evaluation**:
-    *   Calculates Accuracy, Precision, Recall on Test set.
-    *   Generates Confusion Matrix and Classification Report.
-5.  **Export**:
-    *   Saves trained model as `.pth`.
-    *   Exports model to ONNX format with dynamic batch size.
-6.  **Validation**:
-    *   Runs inference on 10 random test images using ONNX Runtime to verify correctness.
+### 2. Running Inference
 
-## Output
+To test the trained ONNX model on a single wafer map image:
 
-All artifacts are saved in the `output/` directory:
+```bash
+python run_inference.py path/to/image.png
+```
 
-*   **output/Dataset/**: Generated images organized by split and class.
-*   **output/models/**:
-    *   `mobilenetv3_lswmd.pth`: PyTorch model weights.
-    *   `model.onnx`: Exported ONNX model.
-*   **output/results/**:
-    *   `training_logs.txt`: Loss/Acc per epoch.
-    *   `metrics_summary.txt`: Final test metrics.
-    *   `confusion_matrix.png`: Heatmap of confusion matrix.
+**Example:**
+```bash
+python run_inference.py output/Dataset/Test/scratch/scratch_12345.png
+```
+
+## Performance Results
+
+The model achieves high accuracy on the test set. Typical metrics (may vary slightly based on random splits):
+
+*   **Overall Accuracy**: ~98%
+*   **Macro Precision**: ~0.69
+*   **Macro Recall**: ~0.62
+
+### Defect Classes
+The model classifies wafers into one of the following 8 categories:
+*   `Center`, `Donut`, `Edge-Loc`, `Edge-Ring`, `Loc`, `Random` (mapped to `other`), `Scratch`, `Near-full` (mapped to `other`), `None` (mapped to `clean`).
+
+## Outputs
+
+After training, check the `output/` directory for:
+*   **Models**: `output/models/mobilenetv3_lswmd.pth` and `model.onnx`
+*   **Metrics**: `output/results/metrics_summary.txt`
+*   **Visualization**: `output/results/confusion_matrix.png`

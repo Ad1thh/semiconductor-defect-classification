@@ -1,0 +1,19 @@
+Accuracy: 0.9802
+Precision (Macro): 0.6897
+Recall (Macro): 0.6177
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      center       0.70      0.34      0.45       644
+       clean       0.99      0.99      0.99    117891
+       donut       0.73      0.67      0.70        83
+    edge_loc       0.63      0.56      0.59       779
+   edge_ring       0.87      0.76      0.81      1452
+         loc       0.52      0.53      0.53       539
+       other       0.60      0.70      0.64       152
+     scratch       0.48      0.39      0.43       179
+
+    accuracy                           0.98    121719
+   macro avg       0.69      0.62      0.64    121719
+weighted avg       0.98      0.98      0.98    121719

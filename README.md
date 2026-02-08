@@ -72,6 +72,9 @@ The model achieves high accuracy on the test set. Typical metrics (may vary slig
 *   **Macro Recall**: ~0.62
 
 ### Defect Classes
+<p align="center">
+  <img src="assets/wafer_defect_classes.png" width="600"/>
+</p>
 The model classifies wafers into one of the following 8 categories:
 *   `Center`, `Donut`, `Edge-Loc`, `Edge-Ring`, `Loc`, `Random` (mapped to `other`), `Scratch`, `Near-full` (mapped to `other`), `None` (mapped to `clean`).
 

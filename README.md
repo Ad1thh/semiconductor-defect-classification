@@ -139,7 +139,8 @@ Ensure **Python 3.8+** and PyTorch are installed.
 pip install numpy pandas opencv-python torch torchvision scikit-learn matplotlib seaborn onnx onnxruntime tqdm pillow python-pptx
 ```
 
-Ensure the dataset pickle file `LSWMD.pkl` is located at `LSWMD.pkl/LSWMD.pkl` relative to the repository root.
+Ensure the dataset pickle file `LSWMD.pkl` is downloaded and placed at `LSWMD.pkl/LSWMD.pkl` relative to the repository root.
+- **Dataset Direct Link (HuggingFace)**: [WM-811K / LSWMD.pkl on HuggingFace](https://huggingface.co/datasets/lslattery/wafer-defect-detection/blob/3727f7d5861751093cabf70213da8e58e4cffcf2/LSWMD.pkl)
 
 ---
 
@@ -231,5 +232,5 @@ python convert_pkl_to_images.py --limit-per-class 100 --output-dir wafer_images
 
 ## 📄 License & Acknowledgments
 
-- **Dataset**: WM-811K (LSWMD) dataset provided for academic research.
+- **Dataset**: WM-811K (LSWMD) dataset available on [HuggingFace Repository (lslattery/wafer-defect-detection)](https://huggingface.co/datasets/lslattery/wafer-defect-detection/blob/3727f7d5861751093cabf70213da8e58e4cffcf2/LSWMD.pkl).
 - **Frameworks**: PyTorch, ONNX Runtime, OpenCV, Scikit-Learn.

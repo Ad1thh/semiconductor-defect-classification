@@ -209,13 +209,23 @@ python convert_pkl_to_images.py --limit-per-class 100 --output-dir wafer_images
 
 ---
 
-## 🗺️ Project Roadmap (Phase 2)
+## 🗺️ Semester Project Timeline & Deliverables Table (Phase 1 Scope)
 
-- [x] Phase 1 Zeroth Review & Slides Deck (`presentation.pptx`).
-- [x] Data ingestion, MobileNetV3-Small PyTorch fine-tuning, and ONNX export.
-- [ ] **INT8 / FP16 Model Quantization**: Further compress `model.onnx` size from ~9MB to ~2.5MB for microcontroller deployment.
-- [ ] **Edge Hardware Latency Profiling**: Test ONNX Runtime latency on NVIDIA Jetson Orin Nano & Raspberry Pi 4.
-- [ ] **Operator Web Dashboard**: Build an interactive web GUI (Streamlit / FastHTML) for uploading wafer map files and viewing defect probability heatmaps.
+| Weeks | Tasks & Technical Activities | Key Deliverables & Milestones |
+| :--- | :--- | :--- |
+| **Weeks 1 – 3** | **Data Pipeline & Preprocessing**<br>• Parse legacy `LSWMD.pkl` (811,472 records)<br>• Patch pandas index unpickling compatibility<br>• Resize wafer maps to $224 \times 224$ grayscale<br>• Stratified 70/15/15 train/val/test split | • Custom pandas patch module<br>• Standardized dataset generator<br>• 8-class preprocessed dataset (`output/Dataset/`) |
+| **Weeks 4 – 6** | **Model Training & Tuning**<br>• Fine-tune MobileNetV3-Small in PyTorch<br>• Apply transfer learning with Adam ($\text{lr}=3\times 10^{-4}$)<br>• Execute 8 training epochs with Cross-Entropy loss<br>• Monitor validation loss and accuracy metrics | • PyTorch model weights (`mobilenetv3_lswmd.pth`)<br>• **98.02% overall test accuracy report**<br>• Per-epoch training/validation log files |
+| **Weeks 7 – 9** | **Model Export & Optimization**<br>• Convert PyTorch weights to open ONNX format<br>• Configure opset 12 with dynamic batch size axes<br>• Validate ONNX Runtime session execution<br>• Generate classification metrics & plots | • Optimized ONNX model file (`model.onnx`)<br>• Classification report & metrics summary<br>• High-res confusion matrix heatmap plot |
+| **Weeks 10 – 12** | **Inference Engine & CLI Validation**<br>• Develop standalone `run_inference.py` script<br>• Implement ImageNet tensor normalization<br>• Compute top-3 defect probability confidence scores<br>• Validate real-time single image CPU/edge inference | • Standalone inference engine script (`run_inference.py`)<br>• Dependency-free ONNX Runtime CLI tool<br>• Verified end-to-end classification pipeline |
+
+---
+
+## 📚 References (IEEE Format)
+
+1. M. Saqlain, Q. Riaz, A. Shahzad, and P. M. Lee, "A Voting Ensemble Classifier for Semiconductor Wafer Defect Pattern Identification," *IEEE Access*, vol. 7, pp. 100415–100427, Jul. 2019.
+2. T. Nakazawa and D. Kulkarni, "Wafer Map Defect Pattern Classification and Hierarchical Feature Extraction Using Convolutional Neural Networks," *IEEE Transactions on Semiconductor Manufacturing*, vol. 31, no. 2, pp. 318–324, May 2018.
+3. A. Howard, M. Sandler, G. Chu, L. C. Chen, B. Chen, M. Tan, W. Wang, Y. Yukun, R. Vasudevan, A. Le, and H. Adam, "Searching for MobileNetV3," in *Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV)*, Seoul, South Korea, Oct. 2019, pp. 1314–1324.
+4. J. S. Im, J. H. Lee, and J. G. Park, "Lightweight Deep Learning Architecture for Real-Time Wafer Defect Pattern Classification," *IEEE Transactions on Industrial Electronics*, vol. 68, no. 9, pp. 8850–8859, Sep. 2021.
 
 ---
 

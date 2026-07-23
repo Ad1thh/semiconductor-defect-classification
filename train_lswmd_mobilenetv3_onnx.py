@@ -26,7 +26,7 @@ warnings.filterwarnings("ignore")
 
 # Configuration
 # Path to the pickle file inside the LSWMD.pkl directory
-DATA_PKL_PATH = r"c:\Users\hp\Downloads\IESA Hackathon\LSWMD.pkl\LSWMD.pkl" # Updated based on list_dir output
+DATA_PKL_PATH = os.path.join(os.path.dirname(__file__), "LSWMD.pkl", "LSWMD.pkl")
 OUTPUT_ROOT = "output"
 DATASET_DIR = os.path.join(OUTPUT_ROOT, "Dataset")
 MODELS_DIR = os.path.join(OUTPUT_ROOT, "models")

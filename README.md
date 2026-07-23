@@ -8,7 +8,7 @@ An end-to-end deep learning and edge deployment pipeline for classifying semicon
 
 - **Project Title**: End-to-End Deep Learning Pipeline for Automated Semiconductor Wafer Defect Classification with ONNX Optimization
 - **Institution**: Saintgits College of Engineering (Autonomous)
-- **Department**: Department of Computer Science and Engineering
+- **Department**: Department of Electronics Engineering
 - **Project Area**: Machine Learning / Semiconductor Quality Assurance
 - **Project Phase**: B.Tech Mini Project Phase - 1
 - **Team Members**:

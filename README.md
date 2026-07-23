@@ -1,4 +1,6 @@
-# Automated Semiconductor Wafer Defect Classification Pipeline
+# End-to-End Deep Learning Pipeline for Automated Semiconductor Wafer Defect Classification with ONNX Optimization
+
+
 
 An end-to-end deep learning and edge deployment pipeline for classifying semiconductor wafer defects using the **WM-811K (LSWMD)** dataset, fine-tuning **MobileNetV3-Small**, and exporting to **ONNX Runtime** for real-time fab edge inference.
 

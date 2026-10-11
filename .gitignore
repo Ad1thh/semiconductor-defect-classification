@@ -8,3 +8,4 @@ LSWMD.pkl/
 
 # Ignore large generated dataset images
 output/Dataset/
+cloudflared.exe

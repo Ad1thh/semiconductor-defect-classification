@@ -564,7 +564,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Lot Simulation
-        runLotSimBtn.addEventListener('click', runLotSimulation);
+        if (runLotSimBtn) {
+            runLotSimBtn.addEventListener('click', runLotSimulation);
+        }
 
         // Modal
         metricsBtn.addEventListener('click', () => metricsModal.classList.add('open'));

@@ -32,15 +32,9 @@
         </div>
 
         <div class="nav-actions">
-            <button id="metricsBtn" class="btn btn-secondary">
+            <button id="metricsBtn" class="btn btn-primary">
                 <i class="fa-solid fa-chart-pie"></i> Model Metrics & CM
             </button>
-            <a href="index.html" class="btn btn-secondary" title="View Presentation Slide Deck">
-                <i class="fa-solid fa-chalkboard-user"></i> Slide Deck
-            </a>
-            <a href="Semiconductor_Defect_Classification_Review.pptx" download class="btn btn-primary" title="Download Official PowerPoint Presentation">
-                <i class="fa-solid fa-file-powerpoint"></i> Download PPTX
-            </a>
         </div>
     </header>
 
@@ -248,33 +242,6 @@
             </div>
         </section>
 
-        <!-- Bottom Section 2: Automated Lot Inspection Simulator -->
-        <section class="lot-simulator-box glass">
-            <div class="lot-sim-info">
-                <h3><i class="fa-solid fa-industry" style="color:var(--cyan);"></i> Automated Fab Production Lot Simulator</h3>
-                <p>Simulates continuous high-throughput wafer screening on semiconductor fabrication lines.</p>
-            </div>
-
-            <div class="lot-sim-stats">
-                <div class="sim-stat-item">
-                    <span class="sim-stat-val" id="simInspectedVal">0 / 25</span>
-                    <span class="sim-stat-lbl">Wafers Screened</span>
-                </div>
-                <div class="sim-stat-item">
-                    <span class="sim-stat-val" id="simYieldVal" style="color:var(--emerald);">100%</span>
-                    <span class="sim-stat-lbl">Lot Yield</span>
-                </div>
-                <div class="sim-stat-item">
-                    <span class="sim-stat-val" id="simDefectVal" style="color:var(--rose);">0</span>
-                    <span class="sim-stat-lbl">Defects Flagged</span>
-                </div>
-            </div>
-
-            <button id="runLotSimBtn" class="btn btn-primary">
-                <i class="fa-solid fa-play"></i> Run Lot Inspection Simulation (25 Wafers)
-            </button>
-        </section>
-
     </main>
 
     <!-- Metrics & Confusion Matrix Modal -->
@@ -325,12 +292,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="demo-footer">
-        <p>B.Tech Mini Project Final Internal Review • Saintgits College of Engineering (Autonomous)</p>
-        <p style="margin-top:4px;">Team: Adithyan B (MGP23EVLSI001) • Anna Boban (MGP23EVLSI002) • Noopa Maria Rojan (MGP23EVLSI009) | Supervisor: Er. Justin Mathew</p>
-    </footer>
 
     <script src="demo.js"></script>
 </body>

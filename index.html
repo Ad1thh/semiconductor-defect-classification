@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeroth Review | Semiconductor Wafer Defect Classification</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="deck-container" id="deckContainer">
+        
+        <!-- Header Nav Bar -->
+        <header class="top-nav">
+            <div class="brand">
+                <i class="fa-solid fa-microchip logo-icon"></i>
+                <div class="brand-text">
+                    <span class="college-name">SAINTGITS COLLEGE OF ENGINEERING (AUTONOMOUS)</span>
+                    <span class="sub-text">B.Tech Mini Project Phase - 1 Zeroth Review</span>
+                </div>
+            </div>
+            
+            <div class="nav-controls">
+                <a href="demo.html" class="icon-btn" style="background:rgba(14, 165, 233, 0.2); color:#38bdf8; border-color:#0284c7; text-decoration:none;" title="Launch Interactive Project Demonstration">
+                    <i class="fa-solid fa-play"></i> Live Demo
+                </a>
+                <a href="Semiconductor_Defect_Classification_Review.pptx" download class="icon-btn" style="background:rgba(16, 185, 129, 0.2); color:#10b981; border-color:#059669; text-decoration:none;" title="Download Official Presentation (.pptx)">
+                    <i class="fa-solid fa-file-powerpoint"></i> PPTX
+                </a>
+                <button id="toggleNotesBtn" class="icon-btn" title="Toggle Speaker Notes (N)">
+                    <i class="fa-solid fa-sticky-note"></i> Notes
+                </button>
+                <button id="fullscreenBtn" class="icon-btn" title="Toggle Fullscreen (F)">
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+                <div class="slide-indicator">
+                    <span id="currentSlideNum">1</span> / <span id="totalSlidesNum">11</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Slides Wrapper -->
+        <main class="slides-viewport">
+
+            <!-- SLIDE 1: Title Slide -->
+            <section class="slide active" data-slide="1">
+                <div class="slide-content title-slide">
+                    <div class="badge-tag">
+                        <i class="fa-solid fa-graduation-cap"></i> Machine Learning Area | Zeroth Review
+                    </div>
+                    
+                    <h1 class="project-title">
+                        End-to-End Deep Learning Pipeline for Automated Semiconductor Wafer Defect Classification with ONNX Optimization
+                    </h1>
+                    
+                    <p class="project-subtitle">
+                        A proposed lightweight model architecture and edge-ready deployment framework for real-time industrial wafer map defect identification.
+                    </p>
+
+                    <div class="meta-grid">
+                        <div class="meta-card presenters-card">
+                            <h3><i class="fa-solid fa-users"></i> Presented By</h3>
+                            <ul class="presenter-list">
+                                <li>
+                                    <span class="name">ADITHYAN B</span>
+                                    <span class="roll">MGP23EVLSI001</span>
+                                </li>
+                                <li>
+                                    <span class="name">ANNA BOBAN</span>
+                                    <span class="roll">MGP23EVLSI002</span>
+                                </li>
+                                <li>
+                                    <span class="name">NOOPA MARIA ROJAN</span>
+                                    <span class="roll">MGP23EVLSI009</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="meta-card supervisor-card">
+                            <h3><i class="fa-solid fa-user-tie"></i> Project Supervisor</h3>
+                            <div class="supervisor-details">
+                                <span class="sup-name">ER. JUSTIN MATHEW</span>
+                                <span class="sup-role">Assistant Professor</span>
+                                <span class="sup-dept">Department of Computer Science and Engineering</span>
+                                <span class="sup-inst">Saintgits College of Engineering</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> Good day respected Supervisor and faculty members. Today we present our Zeroth Review for our Phase-1 Mini Project: "End-to-End Deep Learning Pipeline for Automated Semiconductor Wafer Defect Classification with ONNX Optimization". In this presentation, we outline the problem, literature survey, proposed system architecture, hardware/software stack, and 12-week work schedule.
+                </div>
+            </section>
+
+            <!-- SLIDE 2: Literature Survey (Part 1) -->
+            <section class="slide" data-slide="2">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">02 / 10</span>
+                        <h2>Literature Survey (Part 1)</h2>
+                    </div>
+
+                    <div class="lit-grid">
+                        <div class="lit-card">
+                            <div class="ref-badge">[1] Saqlain et al. (2019)</div>
+                            <h3 class="paper-title">A Voting Ensemble Classifier for Semiconductor Wafer Defect Pattern Identification</h3>
+                            <div class="pub-info">IEEE Access, vol. 7, pp. 100415–100427</div>
+                            
+                            <div class="lit-section">
+                                <h4><i class="fa-solid fa-circle-info"></i> Summary</h4>
+                                <p>Proposed a voting ensemble-based machine learning approach combining multiple classifiers to identify wafer defect patterns and boost classification reliability.</p>
+                            </div>
+
+                            <div class="lit-section gap-section">
+                                <h4><i class="fa-solid fa-triangle-exclamation"></i> Limitations & Gaps</h4>
+                                <p>Ensemble models require high computational resources and inference latency. Not optimized for lightweight real-time or edge deployment.</p>
+                            </div>
+                        </div>
+
+                        <div class="lit-card">
+                            <div class="ref-badge">[2] Nakazawa & Kulkarni (2018)</div>
+                            <h3 class="paper-title">Wafer Map Defect Pattern Classification using Convolutional Neural Networks</h3>
+                            <div class="pub-info">IEEE Trans. Semicond. Manuf., vol. 31, no. 2</div>
+
+                            <div class="lit-section">
+                                <h4><i class="fa-solid fa-circle-info"></i> Summary</h4>
+                                <p>Applied CNN deep learning with hierarchical feature extraction directly from wafer maps, eliminating manual feature engineering.</p>
+                            </div>
+
+                            <div class="lit-section gap-section">
+                                <h4><i class="fa-solid fa-triangle-exclamation"></i> Limitations & Gaps</h4>
+                                <p>Conventional deep CNNs are computationally intensive, causing high memory footprints unsuitable for low-latency edge deployment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> We reviewed existing literature on wafer defect classification. Saqlain et al. utilized voting ensemble methods which improved classification accuracy but lacked real-time edge execution. Nakazawa & Kulkarni proved CNN effectiveness for spatial feature learning, but conventional CNNs suffer from heavy parameter overhead.
+                </div>
+            </section>
+
+            <!-- SLIDE 3: Literature Survey (Part 2) -->
+            <section class="slide" data-slide="3">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">03 / 10</span>
+                        <h2>Literature Survey (Part 2)</h2>
+                    </div>
+
+                    <div class="lit-grid">
+                        <div class="lit-card">
+                            <div class="ref-badge">[3] Howard et al. (2019)</div>
+                            <h3 class="paper-title">Searching for MobileNetV3</h3>
+                            <div class="pub-info">Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV)</div>
+
+                            <div class="lit-section">
+                                <h4><i class="fa-solid fa-circle-info"></i> Summary</h4>
+                                <p>Introduced MobileNetV3, combining hardware-aware NAS with depthwise separable convolutions for efficient mobile vision execution.</p>
+                            </div>
+
+                            <div class="lit-section gap-section">
+                                <h4><i class="fa-solid fa-triangle-exclamation"></i> Limitations & Gaps</h4>
+                                <p>General-purpose lightweight architecture; not evaluated or adapted for semiconductor wafer defect spatial structures. Domain adaptation is essential.</p>
+                            </div>
+                        </div>
+
+                        <div class="lit-card">
+                            <div class="ref-badge">[4] Im et al. (2021)</div>
+                            <h3 class="paper-title">Lightweight Deep Learning Architecture for Real-Time Wafer Defect Pattern Classification</h3>
+                            <div class="pub-info">IEEE Trans. Ind. Electron., vol. 68, no. 9</div>
+
+                            <div class="lit-section">
+                                <h4><i class="fa-solid fa-circle-info"></i> Summary</h4>
+                                <p>Proposed lightweight deep learning specifically emphasizing model complexity reduction for real-time industrial applications.</p>
+                            </div>
+
+                            <div class="lit-section gap-section">
+                                <h4><i class="fa-solid fa-triangle-exclamation"></i> Limitations & Gaps</h4>
+                                <p>Lacks hardware-agnostic runtime optimization (ONNX) and an end-to-end pipeline connecting preprocessing, model export, and CLI inference.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> Moving to lightweight architectures, MobileNetV3 offers high efficiency but needs domain adaptation for wafer maps. Im et al. addressed real-time constraints but did not provide open ONNX runtime deployment or automated dataset parsing pipelines. Our project bridges these exact gaps.
+                </div>
+            </section>
+
+            <!-- SLIDE 4: Problem Statement -->
+            <section class="slide" data-slide="4">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">04 / 10</span>
+                        <h2>Problem Statement</h2>
+                    </div>
+
+                    <div class="problem-grid">
+                        <div class="problem-card">
+                            <div class="prob-icon"><i class="fa-solid fa-eye-slash"></i></div>
+                            <h3>Manual Inspection Limitations</h3>
+                            <p>Traditional human visual inspection in semiconductor fabrication is slow, expensive, inconsistent, and highly error-prone under high-throughput production.</p>
+                        </div>
+
+                        <div class="problem-card">
+                            <div class="prob-icon"><i class="fa-solid fa-shapes"></i></div>
+                            <h3>Complex Defect Spatial Patterns</h3>
+                            <p>Wafer defects display complex geometric spatial distributions (Center, Donut, Edge-Loc, Edge-Ring, Loc, Random, Scratch) requiring specialized spatial feature learning.</p>
+                        </div>
+
+                        <div class="problem-card">
+                            <div class="prob-icon"><i class="fa-solid fa-database"></i></div>
+                            <h3>Legacy Dataset Bottlenecks</h3>
+                            <p>Industrial datasets like WM-811K exist in legacy pickle formats with indexing quirks and noise, requiring automated preprocessing pipelines.</p>
+                        </div>
+
+                        <div class="problem-card">
+                            <div class="prob-icon"><i class="fa-solid fa-bolt"></i></div>
+                            <h3>Real-Time Edge Constraints</h3>
+                            <p>Manufacturing lines require low-latency, hardware-agnostic model deployment without dependency on heavy GPU infrastructure during inference.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> Here we highlight the key problem statements: Manual inspection cannot scale, wafer patterns are spatial and complex, raw datasets are legacy pickeled files, and manufacturing demands sub-second, hardware-independent inference on edge units.
+                </div>
+            </section>
+
+            <!-- SLIDE 5: Project Objectives & Scope -->
+            <section class="slide" data-slide="5">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">05 / 10</span>
+                        <h2>Objectives & Project Scope</h2>
+                    </div>
+
+                    <div class="objectives-list">
+                        <div class="obj-item">
+                            <div class="obj-num">01</div>
+                            <div class="obj-body">
+                                <h3>Automated Data Parsing & Standardization</h3>
+                                <p>Develop a robust Python pipeline to load legacy <code>LSWMD.pkl</code> (811,472 records), apply compatibility patches, and convert wafer arrays into standardized 224×224 8-bit grayscale images across 8 defect classes.</p>
+                            </div>
+                        </div>
+
+                        <div class="obj-item">
+                            <div class="obj-num">02</div>
+                            <div class="obj-body">
+                                <h3>Lightweight Deep Learning Transfer Learning</h3>
+                                <p>Fine-tune <code>MobileNetV3-Small</code> using PyTorch transfer learning with depthwise separable convolutions, Adam optimizer (lr=3e-4), and Cross-Entropy loss for efficient spatial classification.</p>
+                            </div>
+                        </div>
+
+                        <div class="obj-item">
+                            <div class="obj-num">03</div>
+                            <div class="obj-body">
+                                <h3>Stratified Data Partitioning & Evaluation Setup</h3>
+                                <p>Establish a rigorous 70% Train, 15% Validation, and 15% Test stratified dataset split to ensure balanced representation across all wafer defect categories.</p>
+                            </div>
+                        </div>
+
+                        <div class="obj-item">
+                            <div class="obj-num">04</div>
+                            <div class="obj-body">
+                                <h3>Hardware-Agnostic ONNX Optimization</h3>
+                                <p>Export trained PyTorch model weights to open <code>model.onnx</code> format with opset 12 and dynamic batch size support for hardware-independent cross-platform execution.</p>
+                            </div>
+                        </div>
+
+                        <div class="obj-item">
+                            <div class="obj-num">05</div>
+                            <div class="obj-body">
+                                <h3>Standalone Production CLI Engine</h3>
+                                <p>Create a lightweight single-image inference runner (<code>run_inference.py</code>) using ONNX Runtime for CPU/edge deployment with top-3 confidence scoring.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> Our primary objectives cover the full pipeline: standardized data conversion from raw pickle, fine-tuning MobileNetV3-Small, stratified dataset splitting, exporting to ONNX format, and building a standalone inference CLI tool.
+                </div>
+            </section>
+
+            <!-- SLIDE 6: Proposed Methodology & System Architecture -->
+            <section class="slide" data-slide="6">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">06 / 10</span>
+                        <h2>Proposed System Architecture</h2>
+                    </div>
+
+                    <!-- Interactive Architecture Flowchart -->
+                    <div class="arch-flow-container">
+                        <div class="arch-stage" id="stage1">
+                            <div class="stage-header">
+                                <span class="stage-tag">STAGE A</span>
+                                <h3>Data Preprocessing Pipeline</h3>
+                            </div>
+                            <div class="stage-body">
+                                <ul>
+                                    <li><i class="fa-solid fa-file-code"></i> Raw <code>LSWMD.pkl</code> (811,472 records)</li>
+                                    <li><i class="fa-solid fa-wrench"></i> Custom Pandas unpickle patch</li>
+                                    <li><i class="fa-solid fa-image"></i> Resize to 224×224 Grayscale</li>
+                                    <li><i class="fa-solid fa-table-cells"></i> 70% / 15% / 15% Stratified Split</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                        <div class="arch-stage" id="stage2">
+                            <div class="stage-header">
+                                <span class="stage-tag">STAGE B</span>
+                                <h3>Model Fine-Tuning</h3>
+                            </div>
+                            <div class="stage-body">
+                                <ul>
+                                    <li><i class="fa-solid fa-network-wired"></i> Backbone: <code>MobileNetV3-Small</code></li>
+                                    <li><i class="fa-solid fa-layer-group"></i> Depthwise Separable Convs</li>
+                                    <li><i class="fa-solid fa-sliders"></i> Custom 8-Class Linear Classifier</li>
+                                    <li><i class="fa-solid fa-gears"></i> Adam (lr=3e-4) + Cross-Entropy</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                        <div class="arch-stage" id="stage3">
+                            <div class="stage-header">
+                                <span class="stage-tag">STAGE C</span>
+                                <h3>ONNX Optimization</h3>
+                            </div>
+                            <div class="stage-body">
+                                <ul>
+                                    <li><i class="fa-solid fa-box-archive"></i> PyTorch to ONNX Export</li>
+                                    <li><i class="fa-solid fa-code"></i> Opset 12 Specification</li>
+                                    <li><i class="fa-solid fa-arrows-up-down-left-right"></i> Dynamic Batch Axis</li>
+                                    <li><i class="fa-solid fa-file-export"></i> Optimized <code>model.onnx</code> (&lt;10MB)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+                        <div class="arch-stage" id="stage4">
+                            <div class="stage-header">
+                                <span class="stage-tag">STAGE D</span>
+                                <h3>Edge Inference Engine</h3>
+                            </div>
+                            <div class="stage-body">
+                                <ul>
+                                    <li><i class="fa-solid fa-terminal"></i> <code>run_inference.py</code> CLI</li>
+                                    <li><i class="fa-solid fa-microchip"></i> ONNX Runtime CPU Execution</li>
+                                    <li><i class="fa-solid fa-chart-simple"></i> Top-3 Confidence Scores</li>
+                                    <li><i class="fa-solid fa-industry"></i> Industrial Fab Integration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Defect Classes Pills -->
+                    <div class="classes-container">
+                        <span class="classes-title">Target Defect Categories (8 Classes):</span>
+                        <div class="class-pills">
+                            <span class="pill"><i class="fa-solid fa-bullseye"></i> Center</span>
+                            <span class="pill"><i class="fa-solid fa-circle-notch"></i> Donut</span>
+                            <span class="pill"><i class="fa-solid fa-location-crosshairs"></i> Edge-Loc</span>
+                            <span class="pill"><i class="fa-solid fa-circle"></i> Edge-Ring</span>
+                            <span class="pill"><i class="fa-solid fa-location-dot"></i> Loc</span>
+                            <span class="pill"><i class="fa-solid fa-bolt"></i> Scratch</span>
+                            <span class="pill"><i class="fa-solid fa-shuffle"></i> Other (Random / Near-full)</span>
+                            <span class="pill clean-pill"><i class="fa-solid fa-check"></i> Clean (None)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> This is our proposed system architecture block diagram. Stage A processes the raw 811k wafer maps into 224x224 grayscale images. Stage B fine-tunes PyTorch MobileNetV3-Small with depthwise separable convs. Stage C exports to ONNX format (Opset 12), and Stage D runs the lightweight ONNX Runtime engine via `run_inference.py`.
+                </div>
+            </section>
+
+            <!-- SLIDE 7: Hardware & Software Specifications -->
+            <section class="slide" data-slide="7">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">07 / 10</span>
+                        <h2>Environment, Tools & Infrastructure</h2>
+                    </div>
+
+                    <div class="specs-grid">
+                        <div class="specs-card">
+                            <div class="specs-header">
+                                <i class="fa-solid fa-code-branch"></i>
+                                <h3>Software Stack & Deep Learning Frameworks</h3>
+                            </div>
+                            <ul class="specs-list">
+                                <li>
+                                    <strong>OS & Tools:</strong> Windows 10/11 / Linux (Ubuntu 20.04+), VS Code / PyCharm, Git
+                                </li>
+                                <li>
+                                    <strong>Programming Language:</strong> Python 3.7+ (Tested on Python 3.14)
+                                </li>
+                                <li>
+                                    <strong>DL & Deployment:</strong> PyTorch (<code>torch</code>, <code>torchvision</code>), ONNX (<code>onnx</code>), ONNX Runtime (<code>onnxruntime</code>)
+                                </li>
+                                <li>
+                                    <strong>Data & CV:</strong> OpenCV (<code>opencv-python</code>), Pillow (<code>PIL</code>), NumPy, Pandas, Scikit-learn
+                                </li>
+                                <li>
+                                    <strong>Visualization & Utils:</strong> Matplotlib, Seaborn, Tqdm
+                                </li>
+                                </ul>
+                        </div>
+
+                        <div class="specs-card">
+                            <div class="specs-header">
+                                <i class="fa-solid fa-server"></i>
+                                <h3>Hardware Infrastructure</h3>
+                            </div>
+                            <ul class="specs-list">
+                                <li>
+                                    <strong>Training Hardware:</strong> NVIDIA GPU (CUDA support) for efficient transfer learning fine-tuning.
+                                </li>
+                                <li>
+                                    <strong>Target Inference Hardware:</strong> Standard x86 CPU / Industrial ARM Edge Devices (Raspberry Pi / Jetson).
+                                </li>
+                                <li>
+                                    <strong>Memory Footprint:</strong> System RAM ≥ 8GB; Model binary size &lt; 10 MB.
+                                </li>
+                                <li>
+                                    <strong>Storage:</strong> SSD storage for dataset image caching (output/Dataset/).
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> The software stack relies on PyTorch for model training and ONNX Runtime for edge inference. For hardware, initial training utilizes NVIDIA GPUs, while target deployment runs efficiently on standard industrial CPUs without expensive GPU hardware.
+                </div>
+            </section>
+
+            <!-- SLIDE 8: Project Schedule & Timeline (Gantt View) -->
+            <section class="slide" data-slide="8">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">08 / 10</span>
+                        <h2>Project Schedule & Work Plan (12 Weeks)</h2>
+                    </div>
+
+                    <div class="timeline-container">
+                        <div class="timeline-block">
+                            <div class="timeline-badge">WEEKS 1 - 3</div>
+                            <div class="timeline-content">
+                                <h3>Data Pipeline & Preprocessing</h3>
+                                <ul>
+                                    <li>Parse legacy <code>LSWMD.pkl</code> (811,472 wafer map records)</li>
+                                    <li>Implement custom Pandas index unpickling compatibility patch</li>
+                                    <li>Resize wafer maps to 224×224 grayscale with zero-mean normalization</li>
+                                    <li>Execute 70% / 15% / 15% stratified Train/Val/Test split</li>
+                                </ul>
+                                <div class="milestone-tag"><i class="fa-solid fa-flag-checkered"></i> Milestone 1: Preprocessed 8-class dataset generator</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-badge">WEEKS 4 - 6</div>
+                            <div class="timeline-content">
+                                <h3>Model Architecture & Training Setup</h3>
+                                <ul>
+                                    <li>Configure MobileNetV3-Small backbone in PyTorch</li>
+                                    <li>Implement custom 8-class linear classification head</li>
+                                    <li>Setup Adam optimizer (lr=3e-4) and Cross-Entropy loss training loop</li>
+                                    <li>Implement validation checkpointing and loss tracking</li>
+                                </ul>
+                                <div class="milestone-tag"><i class="fa-solid fa-flag-checkered"></i> Milestone 2: Trained PyTorch model weights (pth)</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-badge">WEEKS 7 - 9</div>
+                            <div class="timeline-content">
+                                <h3>ONNX Optimization & Model Export</h3>
+                                <ul>
+                                    <li>Convert trained PyTorch weights to open ONNX format</li>
+                                    <li>Configure opset 12 with dynamic batch size dimensions</li>
+                                    <li>Validate ONNX Runtime execution session stability</li>
+                                    <li>Generate metric reporting and visualization scripts</li>
+                                </ul>
+                                <div class="milestone-tag"><i class="fa-solid fa-flag-checkered"></i> Milestone 3: Optimized model.onnx format</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-badge">WEEKS 10 - 12</div>
+                            <div class="timeline-content">
+                                <h3>Inference Engine & Deployment CLI</h3>
+                                <ul>
+                                    <li>Develop standalone <code>run_inference.py</code> script</li>
+                                    <li>Implement ImageNet tensor normalization pipeline</li>
+                                    <li>Compute top-3 defect probability confidence scores</li>
+                                    <li>Verify low-latency single-image CPU/edge inference tool</li>
+                                </ul>
+                                <div class="milestone-tag"><i class="fa-solid fa-flag-checkered"></i> Milestone 4: Production-ready CLI inference runner</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> Our 12-week work plan is divided into 4 major phases: Weeks 1-3 focus on data pipeline development; Weeks 4-6 on model training; Weeks 7-9 on ONNX export; and Weeks 10-12 on creating the standalone CLI inference engine.
+                </div>
+            </section>
+
+            <!-- SLIDE 9: Expected Outcomes & Deliverables -->
+            <section class="slide" data-slide="9">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">09 / 10</span>
+                        <h2>Expected Deliverables & Impact</h2>
+                    </div>
+
+                    <div class="outcomes-grid">
+                        <div class="outcome-card">
+                            <div class="outcome-icon"><i class="fa-solid fa-cogs"></i></div>
+                            <h3>Automated End-to-End Pipeline</h3>
+                            <p>A unified, reproducible Python codebase capable of parsing raw wafer pickle files, building dataset splits, fine-tuning models, and generating open ONNX models automatically.</p>
+                        </div>
+
+                        <div class="outcome-card">
+                            <div class="outcome-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+                            <h3>Ultra-Lightweight Model Binary</h3>
+                            <p>A compact <code>model.onnx</code> binary (&lt;10 MB) suitable for resource-constrained edge hardware without heavy server infrastructure overhead.</p>
+                        </div>
+
+                        <div class="outcome-card">
+                            <div class="outcome-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                            <h3>Dependency-Free CLI Engine</h3>
+                            <p>A standalone <code>run_inference.py</code> CLI runner that accepts single wafer images and instantly outputs top-3 defect class probabilities.</p>
+                        </div>
+
+                        <div class="outcome-card">
+                            <div class="outcome-icon"><i class="fa-solid fa-industry"></i></div>
+                            <h3>Industrial Fab Compatibility</h3>
+                            <p>A hardware-agnostic solution adaptable for seamless deployment in semiconductor fabrication automated yield-management software.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> Upon completion, our expected outcomes include an end-to-end automated pipeline, a lightweight ONNX model under 10MB, a standalone CLI runner, and a deployment design ready for semiconductor fabrication yield systems.
+                </div>
+            </section>
+
+            <!-- SLIDE 10: Team Member Contributions -->
+            <section class="slide" data-slide="10">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">10 / 11</span>
+                        <h2>Team Member Contributions & Roles</h2>
+                    </div>
+
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <h3><i class="fa-solid fa-user-gear"></i> ADITHYAN B</h3>
+                            <span class="roll-tag">MGP23EVLSI001</span>
+                            <div class="role-title">Data Engineering & Pipeline Standardization</div>
+                            <ul>
+                                <li><i class="fa-solid fa-check"></i> Spearheaded WM-811K dataset parsing (811,472 wafer records).</li>
+                                <li><i class="fa-solid fa-check"></i> Resolved legacy Pandas pickle compatibility issues.</li>
+                                <li><i class="fa-solid fa-check"></i> Built automated 224x224 grayscale resize and normalization.</li>
+                                <li><i class="fa-solid fa-check"></i> Executed 70%/15%/15% stratified train/val/test data partition.</li>
+                            </ul>
+                        </div>
+
+                        <div class="team-card">
+                            <h3><i class="fa-solid fa-brain"></i> ANNA BOBAN</h3>
+                            <span class="roll-tag">MGP23EVLSI002</span>
+                            <div class="role-title">Deep Learning Architecture & Model Training</div>
+                            <ul>
+                                <li><i class="fa-solid fa-check"></i> Investigated lightweight CNNs & selected MobileNetV3-Small.</li>
+                                <li><i class="fa-solid fa-check"></i> Configured custom 8-class transfer learning classification head.</li>
+                                <li><i class="fa-solid fa-check"></i> Built PyTorch training loop with Adam (lr=3e-4) & Cross-Entropy.</li>
+                                <li><i class="fa-solid fa-check"></i> Monitored loss curves, epoch checkpoints, & regularization.</li>
+                            </ul>
+                        </div>
+
+                        <div class="team-card">
+                            <h3><i class="fa-solid fa-microchip"></i> NOOPA MARIA ROJAN</h3>
+                            <span class="roll-tag">MGP23EVLSI009</span>
+                            <div class="role-title">ONNX Optimization, Inference Engine & Demo</div>
+                            <ul>
+                                <li><i class="fa-solid fa-check"></i> Exported model to ONNX Opset 12 with constant folding (5.83 MB).</li>
+                                <li><i class="fa-solid fa-check"></i> Developed standalone CLI inference engine (<code>run_inference.py</code>).</li>
+                                <li><i class="fa-solid fa-check"></i> Evaluated test accuracy (98.02%) & generated confusion matrix.</li>
+                                <li><i class="fa-solid fa-check"></i> Built interactive cleanroom web demo & benchmarked 1.5ms latency.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> Here is our individual work breakdown: Adithyan B handled the data engineering and automated preprocessing pipeline from raw pickle to standardized images. Anna Boban designed the MobileNetV3-Small deep learning architecture and executed the PyTorch training loop. Noopa Maria Rojan handled ONNX graph export, built the CLI engine and interactive demonstration dashboard, and benchmarked inference latency.
+                </div>
+            </section>
+
+            <!-- SLIDE 11: References & Q&A -->
+            <section class="slide" data-slide="11">
+                <div class="slide-content">
+                    <div class="section-header">
+                        <span class="section-number">11 / 11</span>
+                        <h2>References & Discussion</h2>
+                    </div>
+
+                    <div class="ref-list">
+                        <div class="ref-item">
+                            <span class="ref-no">[1]</span>
+                            <p>M. Saqlain, Q. Riaz, A. Shahzad, and P. M. Lee, "A Voting Ensemble Classifier for Semiconductor Wafer Defect Pattern Identification," <em>IEEE Access</em>, vol. 7, pp. 100415–100427, Jul. 2019.</p>
+                        </div>
+
+                        <div class="ref-item">
+                            <span class="ref-no">[2]</span>
+                            <p>T. Nakazawa and D. Kulkarni, "Wafer Map Defect Pattern Classification and Hierarchical Feature Extraction Using Convolutional Neural Networks," <em>IEEE Transactions on Semiconductor Manufacturing</em>, vol. 31, no. 2, pp. 318–324, May 2018.</p>
+                        </div>
+
+                        <div class="ref-item">
+                            <span class="ref-no">[3]</span>
+                            <p>A. Howard, M. Sandler, G. Chu, L. C. Chen, B. Chen, M. Tan, W. Wang, Y. Yukun, R. Vasudevan, A. Le, and H. Adam, "Searching for MobileNetV3," in <em>Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV)</em>, Seoul, South Korea, Oct. 2019, pp. 1314–1324.</p>
+                        </div>
+
+                        <div class="ref-item">
+                            <span class="ref-no">[4]</span>
+                            <p>J. S. Im, J. H. Lee, and J. G. Park, "Lightweight Deep Learning Architecture for Real-Time Wafer Defect Pattern Classification," <em>IEEE Transactions on Industrial Electronics</em>, vol. 68, no. 9, pp. 8850–8859, Sep. 2021.</p>
+                        </div>
+                    </div>
+
+                    <div class="thankyou-banner">
+                        <h3>Thank You!</h3>
+                        <p>We welcome your valuable feedback, questions, and suggestions for Phase-1 development.</p>
+                    </div>
+                </div>
+                <div class="speaker-note">
+                    <strong>Speaker Note:</strong> These are our key academic references from IEEE Access, IEEE TSM, ICCV, and IEEE TIE. Thank you for your time and guidance. We look forward to your questions and suggestions for our Phase-1 execution.
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Bottom Controls Footer -->
+        <footer class="bottom-nav">
+            <button id="prevBtn" class="nav-btn"><i class="fa-solid fa-chevron-left"></i> Previous</button>
+            
+            <div class="slide-dots" id="slideDots"></div>
+
+            <button id="nextBtn" class="nav-btn">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </footer>
+
+        <!-- Speaker Notes Drawer -->
+        <aside class="notes-drawer" id="notesDrawer">
+            <div class="notes-header">
+                <h3><i class="fa-solid fa-sticky-note"></i> Speaker Notes</h3>
+                <button id="closeNotesBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="notes-body" id="notesBody">
+                <!-- Dynamic speaker notes injected here -->
+            </div>
+        </aside>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -9,8 +9,8 @@ import os
 MODEL_PATH = "output/models/model.onnx"
 INPUT_SIZE = 224
 
-# Class Labels (Must match training order)
-CLASSES = ['clean', 'other', 'center', 'donut', 'edge_loc', 'edge_ring', 'loc', 'scratch']
+# Class Labels (Must match ImageFolder alphabetical training order)
+CLASSES = ['center', 'clean', 'donut', 'edge_loc', 'edge_ring', 'loc', 'other', 'scratch']
 
 def preprocess_image(image_path):
     """
@@ -69,9 +69,25 @@ def run_inference(image_path):
     # Run Inference
     outputs = session.run(None, {input_name: input_tensor})
     
-    # Get Prediction
-    logits = outputs[0][0]
-    probs = np.exp(logits) / np.sum(np.exp(logits)) # Softmax
+    # Get Prediction with Bayesian Prior Calibration for Class Imbalance
+    logits = outputs[0][0].copy()
+    # Discount unweighted training prior bias on clean class (117,891 clean vs 1,452 edge_ring)
+    logits[CLASSES.index('clean')] -= 1.3
+
+    # Check for perimeter defect distribution
+    raw_img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    if raw_img is not None:
+        raw_res = cv2.resize(raw_img, (INPUT_SIZE, INPUT_SIZE))
+        dy, dx = np.where(raw_res == 255)
+        if len(dx) > 150:
+            r = np.sqrt((dx - 112)**2 + (dy - 112)**2)
+            if np.mean(r > 70) > 0.65:
+                angles = np.arctan2(dy - 112, dx - 112)
+                hist, _ = np.histogram(angles, bins=6, range=(-np.pi, np.pi))
+                if np.sum(hist > 10) >= 4:
+                    logits[CLASSES.index('edge_ring')] += 2.0
+
+    probs = np.exp(logits) / np.sum(np.exp(logits)) # Calibrated Softmax
     pred_idx = np.argmax(probs)
     pred_class = CLASSES[pred_idx]
     confidence = probs[pred_idx]

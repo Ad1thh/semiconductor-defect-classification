@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Project Demonstration | Semiconductor Wafer Defect Classification</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="demo-header">
+        <div class="brand-section">
+            <i class="fa-solid fa-microchip brand-icon"></i>
+            <div>
+                <h1 class="brand-title">Automated Semiconductor Wafer Defect Inspection System</h1>
+                <div class="brand-subtitle">
+                    <span class="status-dot"></span>
+                    <span>ENGINE: MobileNetV3-Small (ONNX)</span>
+                    <span>•</span>
+                    <span>STATION: AOI-INSPECT-LINE-4</span>
+                    <span>•</span>
+                    <span>LATENCY: ~1.5 ms</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <button id="metricsBtn" class="btn btn-secondary">
+                <i class="fa-solid fa-chart-pie"></i> Model Metrics & CM
+            </button>
+            <a href="index.html" class="btn btn-secondary" title="View Presentation Slide Deck">
+                <i class="fa-solid fa-chalkboard-user"></i> Slide Deck
+            </a>
+            <a href="Semiconductor_Defect_Classification_Review.pptx" download class="btn btn-primary" title="Download Official PowerPoint Presentation">
+                <i class="fa-solid fa-file-powerpoint"></i> Download PPTX
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="demo-content">
+
+        <!-- Telemetry Summary Strip -->
+        <section class="telemetry-strip">
+            <div class="telemetry-item glass">
+                <i class="fa-solid fa-bolt telemetry-icon"></i>
+                <div class="telemetry-meta">
+                    <span class="telemetry-label">Inference Latency</span>
+                    <span class="telemetry-val" id="latencyVal">1.53 ms</span>
+                </div>
+            </div>
+
+            <div class="telemetry-item glass accent-emerald">
+                <i class="fa-solid fa-bullseye telemetry-icon"></i>
+                <div class="telemetry-meta">
+                    <span class="telemetry-label">Test Set Accuracy</span>
+                    <span class="telemetry-val">98.02%</span>
+                </div>
+            </div>
+
+            <div class="telemetry-item glass accent-amber">
+                <i class="fa-solid fa-box-archive telemetry-icon"></i>
+                <div class="telemetry-meta">
+                    <span class="telemetry-label">Model Footprint</span>
+                    <span class="telemetry-val">5.84 MB (ONNX)</span>
+                </div>
+            </div>
+
+            <div class="telemetry-item glass accent-purple">
+                <i class="fa-solid fa-microchip telemetry-icon"></i>
+                <div class="telemetry-meta">
+                    <span class="telemetry-label">Hardware Target</span>
+                    <span class="telemetry-val">Edge CPU / ARM</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Inspection & Prediction Dashboard -->
+        <section class="dashboard-grid">
+
+            <!-- LEFT COLUMN: Interactive Wafer Canvas & Uploader -->
+            <div class="wafer-inspection-card glass">
+                <div class="card-head">
+                    <span class="card-title">
+                        <i class="fa-solid fa-compact-disc"></i> 300mm Silicon Wafer Map Visualizer
+                    </span>
+                    <span class="card-tag">784 DIE MATRIX</span>
+                </div>
+
+                <div class="wafer-canvas-wrapper">
+                    <canvas id="waferCanvas" width="300" height="300"></canvas>
+                    
+                    <!-- Visualization Mode Controls -->
+                    <div class="wafer-mode-bar">
+                        <button class="mode-btn active" data-mode="heatmap">
+                            <i class="fa-solid fa-fire"></i> Heatmap
+                        </button>
+                        <button class="mode-btn" data-mode="binary">
+                            <i class="fa-solid fa-square-check"></i> Die Pass/Fail
+                        </button>
+                        <button class="mode-btn" data-mode="raw">
+                            <i class="fa-solid fa-image"></i> Greyscale
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dropzone / Image Uploader -->
+                <div class="upload-zone" id="uploadZone">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <p>Drag & drop custom wafer map image, or <span>browse file</span></p>
+                    <input type="file" id="fileInput" accept="image/png, image/jpeg">
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Real-Time Prediction & Probability Breakdown -->
+            <div class="prediction-card glass">
+                
+                <!-- Primary Defect Classification Banner -->
+                <div class="defect-banner defect-detected" id="defectBanner">
+                    <div class="defect-banner-left">
+                        <div class="defect-icon-box">
+                            <i class="fa-solid fa-bolt" id="defectIcon"></i>
+                        </div>
+                        <div class="defect-title-group">
+                            <h2 id="defectName">SCRATCH</h2>
+                            <p id="defectDesc">Curvilinear streak of damaged dies typically caused by robot end-effectors or tweezers.</p>
+                        </div>
+                    </div>
+                    <div class="defect-badge badge-defect" id="defectBadge">
+                        DEFECT DETECTED
+                    </div>
+                </div>
+
+                <!-- Primary Confidence Gauge -->
+                <div class="confidence-gauge-box">
+                    <div class="gauge-left">
+                        <span class="gauge-label">Model Confidence</span>
+                        <span class="gauge-value" id="gaugeValue">99.9%</span>
+                    </div>
+                    <div class="gauge-progress-container">
+                        <div class="gauge-progress-bar" id="gaugeBar" style="width: 99.9%;"></div>
+                    </div>
+                    <div class="gauge-time">
+                        <i class="fa-solid fa-check-double"></i> Verified
+                    </div>
+                </div>
+
+                <!-- 8-Class Probability Breakdown -->
+                <div class="prob-dist-box">
+                    <div class="prob-dist-title">
+                        <span>Topological Defect Class</span>
+                        <span>Softmax Probability</span>
+                    </div>
+                    <div id="probDistList" style="display:flex; flex-direction:column; gap:8px;">
+                        <!-- Dynamic probability rows injected here by demo.js -->
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Bottom Section 1: Quick-Test Defect Gallery -->
+        <section class="gallery-section">
+            <div class="section-title-bar">
+                <h2 class="section-title">
+                    <i class="fa-solid fa-layer-group"></i> Quick-Test Defect Category Presets (Click Any to Inspect)
+                </h2>
+                <span class="card-tag">8 BENCHMARK PATTERNS</span>
+            </div>
+
+            <div class="gallery-grid">
+                
+                <div class="preset-card glass" data-preset="center">
+                    <img src="wafer_images/center/center_3837.png" alt="Center" class="preset-thumb">
+                    <span class="preset-name">Center</span>
+                    <span class="preset-tag">98.01% Conf</span>
+                </div>
+
+                <div class="preset-card glass" data-preset="clean">
+                    <img src="wafer_images/clean/clean_0.png" alt="Clean" class="preset-thumb">
+                    <span class="preset-name">Clean</span>
+                    <span class="preset-tag" style="color:var(--emerald);">100% Pass</span>
+                </div>
+
+                <div class="preset-card glass" data-preset="donut">
+                    <img src="wafer_images/donut/donut_252319.png" alt="Donut" class="preset-thumb">
+                    <span class="preset-name">Donut</span>
+                    <span class="preset-tag">99.99% Conf</span>
+                </div>
+
+                <div class="preset-card glass" data-preset="edge_loc">
+                    <img src="wafer_images/edge_loc/edge_loc_2565.png" alt="Edge-Loc" class="preset-thumb">
+                    <span class="preset-name">Edge-Loc</span>
+                    <span class="preset-tag">99.29% Conf</span>
+                </div>
+
+                <div class="preset-card glass" data-preset="edge_ring">
+                    <img src="wafer_images/edge_ring/edge_ring_11030.png" alt="Edge-Ring" class="preset-thumb">
+                    <span class="preset-name">Edge-Ring</span>
+                    <span class="preset-tag">79.41% Conf</span>
+                </div>
+
+                <div class="preset-card glass" data-preset="loc">
+                    <img src="wafer_images/loc/loc_646.png" alt="Loc" class="preset-thumb">
+                    <span class="preset-name">Loc</span>
+                    <span class="preset-tag">99.39% Conf</span>
+                </div>
+
+                <div class="preset-card glass" data-preset="other">
+                    <img src="wafer_images/other/other_18085.png" alt="Other" class="preset-thumb">
+                    <span class="preset-name">Other</span>
+                    <span class="preset-tag">99.96% Conf</span>
+                </div>
+
+                <div class="preset-card glass active" data-preset="scratch">
+                    <img src="wafer_images/scratch/scratch_129086.png" alt="Scratch" class="preset-thumb">
+                    <span class="preset-name">Scratch</span>
+                    <span class="preset-tag">99.92% Conf</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Bottom Section 2: Automated Lot Inspection Simulator -->
+        <section class="lot-simulator-box glass">
+            <div class="lot-sim-info">
+                <h3><i class="fa-solid fa-industry" style="color:var(--cyan);"></i> Automated Fab Production Lot Simulator</h3>
+                <p>Simulates continuous high-throughput wafer screening on semiconductor fabrication lines.</p>
+            </div>
+
+            <div class="lot-sim-stats">
+                <div class="sim-stat-item">
+                    <span class="sim-stat-val" id="simInspectedVal">0 / 25</span>
+                    <span class="sim-stat-lbl">Wafers Screened</span>
+                </div>
+                <div class="sim-stat-item">
+                    <span class="sim-stat-val" id="simYieldVal" style="color:var(--emerald);">100%</span>
+                    <span class="sim-stat-lbl">Lot Yield</span>
+                </div>
+                <div class="sim-stat-item">
+                    <span class="sim-stat-val" id="simDefectVal" style="color:var(--rose);">0</span>
+                    <span class="sim-stat-lbl">Defects Flagged</span>
+                </div>
+            </div>
+
+            <button id="runLotSimBtn" class="btn btn-primary">
+                <i class="fa-solid fa-play"></i> Run Lot Inspection Simulation (25 Wafers)
+            </button>
+        </section>
+
+    </main>
+
+    <!-- Metrics & Confusion Matrix Modal -->
+    <div class="modal-overlay" id="metricsModal">
+        <div class="modal-card glass">
+            <div class="card-head">
+                <span class="card-title">
+                    <i class="fa-solid fa-chart-simple"></i> Model Evaluation & Confusion Matrix
+                </span>
+                <button class="btn btn-secondary" id="closeMetricsBtn" style="padding:4px 10px;">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:12px;">
+                    <div class="telemetry-item glass">
+                        <div class="telemetry-meta">
+                            <span class="telemetry-label">Accuracy</span>
+                            <span class="telemetry-val" style="color:var(--emerald);">98.02%</span>
+                        </div>
+                    </div>
+                    <div class="telemetry-item glass">
+                        <div class="telemetry-meta">
+                            <span class="telemetry-label">Macro Precision</span>
+                            <span class="telemetry-val" style="color:var(--cyan);">0.6897</span>
+                        </div>
+                    </div>
+                    <div class="telemetry-item glass">
+                        <div class="telemetry-meta">
+                            <span class="telemetry-label">Macro Recall</span>
+                            <span class="telemetry-val" style="color:var(--amber);">0.6177</span>
+                        </div>
+                    </div>
+                    <div class="telemetry-item glass">
+                        <div class="telemetry-meta">
+                            <span class="telemetry-label">Test Samples</span>
+                            <span class="telemetry-val">121,719</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cm-img-wrapper">
+                    <h3 style="font-size:14px; margin-bottom:10px; color:var(--text-secondary);">
+                        Confusion Matrix (8 Classes on Test Partition)
+                    </h3>
+                    <img src="output/results/confusion_matrix.png" alt="Confusion Matrix">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="demo-footer">
+        <p>B.Tech Mini Project Phase - 1 Zeroth Review • Saintgits College of Engineering (Autonomous)</p>
+        <p style="margin-top:4px;">Team: Adithyan B (MGP23EVLSI001) • Anna Boban (MGP23EVLSI002) • Noopa Maria Rojan (MGP23EVLSI009) | Supervisor: Er. Justin Mathew</p>
+    </footer>
+
+    <script src="demo.js"></script>
+</body>
+</html>

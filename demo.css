@@ -331,6 +331,58 @@ body {
     color: var(--cyan);
 }
 
+/* Die Pass/Fail Telemetry & Legend Strip */
+.die-legend-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 16px;
+    padding: 8px 14px;
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-family: var(--font-mono);
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+}
+
+.legend-chip {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.legend-pass {
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
+}
+
+.legend-fail {
+    background: #ef4444;
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.7);
+}
+
+.text-emerald {
+    color: var(--emerald) !important;
+}
+
+.text-rose {
+    color: var(--rose) !important;
+}
+
+.text-cyan {
+    color: var(--cyan) !important;
+}
+
 /* File Upload & Dropzone */
 .upload-zone {
     margin: 16px 20px 20px;

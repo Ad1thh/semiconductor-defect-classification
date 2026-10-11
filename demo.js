@@ -119,9 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const latencyVal = document.getElementById('latencyVal');
     const probDistList = document.getElementById('probDistList');
 
-    // Mode Buttons
+    // Mode Buttons & Die Legend Elements
     const modeBtns = document.querySelectorAll('.mode-btn');
-    let currentMode = 'heatmap'; // 'heatmap', 'binary', 'raw'
+    const passDieCount = document.getElementById('passDieCount');
+    const failDieCount = document.getElementById('failDieCount');
+    const dieYieldCount = document.getElementById('dieYieldCount');
+    let currentMode = 'binary'; // 'binary' (Die Pass/Fail), 'heatmap', 'raw'
     let currentPreset = 'scratch'; // Default active preset
 
     // Modal
@@ -165,11 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
         activeImage.src = data.image;
     }
 
-    // Render Canvas Wafer Map
+    // Render Canvas Wafer Map (Precise Die Matrix Visualizer)
     function renderWaferCanvas() {
         const width = waferCanvas.width = 300;
         const height = waferCanvas.height = 300;
-        const radius = width / 2 - 12;
+        const radius = width / 2 - 14;
         const centerX = width / 2;
         const centerY = height / 2;
 
@@ -178,65 +181,81 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Draw Silicon Wafer Base Disc
         ctx.save();
         ctx.beginPath();
-        // Wafer alignment notch at bottom
         ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
         ctx.closePath();
         ctx.clip();
 
-        // Silicon disc background
+        // Silicon disc gradient background
         const discGrad = ctx.createRadialGradient(centerX, centerY, radius * 0.1, centerX, centerY, radius);
-        discGrad.addColorStop(0, '#1e293b');
-        discGrad.addColorStop(0.85, '#0f172a');
-        discGrad.addColorStop(1, '#020617');
+        discGrad.addColorStop(0, '#111827');
+        discGrad.addColorStop(0.85, '#0b0f19');
+        discGrad.addColorStop(1, '#030712');
         ctx.fillStyle = discGrad;
         ctx.fillRect(0, 0, width, height);
 
-        // 2. Draw wafer content based on active mode
+        let passDies = 0;
+        let failDies = 0;
+
+        // 2. Sample and Draw Die Matrix (32x32 Silicon Grid)
         if (activeImage.complete && activeImage.naturalWidth > 0) {
-            // Offscreen canvas to sample image pixels
+            const GRID = 32;
             const off = document.createElement('canvas');
-            off.width = 28; // 28x28 die grid
-            off.height = 28;
+            off.width = GRID;
+            off.height = GRID;
             const oCtx = off.getContext('2d');
-            oCtx.drawImage(activeImage, 0, 0, 28, 28);
-            const imgData = oCtx.getImageData(0, 0, 28, 28).data;
+            oCtx.imageSmoothingEnabled = false; // Nearest-neighbor sampling to retain discrete dies
+            oCtx.drawImage(activeImage, 0, 0, GRID, GRID);
+            const imgData = oCtx.getImageData(0, 0, GRID, GRID).data;
 
-            // Render die grid
-            const dieSize = (radius * 1.8) / 28;
-            const startX = centerX - (radius * 0.9);
-            const startY = centerY - (radius * 0.9);
+            const dieSize = (radius * 1.88) / GRID;
+            const startX = centerX - (radius * 0.94);
+            const startY = centerY - (radius * 0.94);
 
-            for (let r = 0; r < 28; r++) {
-                for (let c = 0; c < 28; c++) {
+            for (let r = 0; r < GRID; r++) {
+                for (let c = 0; c < GRID; c++) {
                     const dieX = startX + c * dieSize;
                     const dieY = startY + r * dieSize;
 
-                    // Check if die falls inside circular wafer boundary
-                    const dx = (dieX + dieSize/2) - centerX;
-                    const dy = (dieY + dieSize/2) - centerY;
-                    if (Math.sqrt(dx*dx + dy*dy) > radius - 6) continue;
+                    // Wafer boundary geometry check
+                    const dx = (dieX + dieSize / 2) - centerX;
+                    const dy = (dieY + dieSize / 2) - centerY;
+                    if (Math.sqrt(dx * dx + dy * dy) > radius - 4) continue;
 
-                    const pIdx = (r * 28 + c) * 4;
+                    const pIdx = (r * GRID + c) * 4;
                     const brightness = (imgData[pIdx] + imgData[pIdx + 1] + imgData[pIdx + 2]) / 3;
 
-                    // Color based on mode
-                    if (currentMode === 'heatmap') {
-                        if (brightness > 130) {
-                            // Defect die (bright heat)
-                            ctx.fillStyle = brightness > 190 ? '#f43f5e' : '#f59e0b';
-                        } else if (brightness > 60) {
-                            ctx.fillStyle = '#0ea5e9';
-                        } else {
-                            // Normal pass die
-                            ctx.fillStyle = '#1e293b';
-                        }
-                    } else if (currentMode === 'binary') {
-                        ctx.fillStyle = brightness > 120 ? '#f43f5e' : '#10b981';
-                    } else { // 'raw'
-                        ctx.fillStyle = `rgb(${brightness},${brightness},${brightness})`;
+                    // Empty substrate / no die outside wafer perimeter
+                    if (brightness < 60) {
+                        ctx.fillStyle = '#0a0f1d';
+                        ctx.fillRect(dieX, dieY, dieSize - 1.2, dieSize - 1.2);
+                        continue;
                     }
 
-                    ctx.fillRect(dieX, dieY, dieSize - 1, dieSize - 1);
+                    // Determine defect vs pass
+                    // WM-811K standard: 127 = Good/Pass Die, 255 = Defect/Fail Die
+                    const isDefect = (currentPreset === 'clean') ? false : (brightness >= 185);
+
+                    if (isDefect) {
+                        failDies++;
+                        if (currentMode === 'binary') {
+                            ctx.fillStyle = '#ef4444'; // RED FOR FAIL CHIP
+                        } else if (currentMode === 'heatmap') {
+                            ctx.fillStyle = brightness > 220 ? '#ef4444' : '#f59e0b'; // Red/amber heat
+                        } else {
+                            ctx.fillStyle = '#ffffff'; // White in greyscale
+                        }
+                    } else {
+                        passDies++;
+                        if (currentMode === 'binary') {
+                            ctx.fillStyle = '#10b981'; // GREEN FOR PASS CHIP
+                        } else if (currentMode === 'heatmap') {
+                            ctx.fillStyle = '#1e3a5f'; // Slate blue for nominal chip
+                        } else {
+                            ctx.fillStyle = '#64748b'; // Slate grey in greyscale
+                        }
+                    }
+
+                    ctx.fillRect(dieX, dieY, dieSize - 1.2, dieSize - 1.2);
                 }
             }
         }
@@ -250,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.lineWidth = 2.5;
         ctx.stroke();
 
-        // Draw wafer notch at bottom (orientation flat)
+        // Wafer orientation notch at bottom
         ctx.beginPath();
         ctx.arc(centerX, centerY + radius, 6, Math.PI, 0, true);
         ctx.fillStyle = '#0a0f1d';
@@ -258,6 +277,15 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.strokeStyle = '#38bdf8';
         ctx.lineWidth = 2;
         ctx.stroke();
+
+        // 4. Update Die Statistics Strip
+        const totalScreened = passDies + failDies;
+        if (passDieCount) passDieCount.textContent = passDies;
+        if (failDieCount) failDieCount.textContent = failDies;
+        if (dieYieldCount) {
+            const yieldPct = totalScreened > 0 ? ((passDies / totalScreened) * 100).toFixed(1) : '100.0';
+            dieYieldCount.textContent = `${yieldPct}%`;
+        }
     }
 
     // Update Telemetry & Probability Distribution
@@ -341,6 +369,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         const res = await resp.json();
                         if (res.success) {
                             const pred = res.predicted_class;
+                            currentPreset = pred;
+                            renderWaferCanvas();
                             const customData = {
                                 name: `${PRESETS[pred]?.name || pred.toUpperCase()}`,
                                 image: e.target.result,
@@ -433,6 +463,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Preset metadata for matched key
+                currentPreset = predictedKey;
+                renderWaferCanvas();
                 const presetInfo = PRESETS[predictedKey] || PRESETS['other'];
                 const confScore = (predictedKey === 'clean') ? 100.0 : (94.5 + Math.random() * 4.8);
                 const customDist = {};

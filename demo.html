@@ -99,15 +99,34 @@
                     
                     <!-- Visualization Mode Controls -->
                     <div class="wafer-mode-bar">
-                        <button class="mode-btn active" data-mode="heatmap">
-                            <i class="fa-solid fa-fire"></i> Heatmap
-                        </button>
-                        <button class="mode-btn" data-mode="binary">
+                        <button class="mode-btn active" data-mode="binary">
                             <i class="fa-solid fa-square-check"></i> Die Pass/Fail
+                        </button>
+                        <button class="mode-btn" data-mode="heatmap">
+                            <i class="fa-solid fa-fire"></i> Heatmap
                         </button>
                         <button class="mode-btn" data-mode="raw">
                             <i class="fa-solid fa-image"></i> Greyscale
                         </button>
+                    </div>
+
+                    <!-- Live Die Pass/Fail Telemetry & Color Legend -->
+                    <div class="die-legend-strip">
+                        <div class="legend-item">
+                            <span class="legend-chip legend-pass"></span>
+                            <span>PASS Chips (Good):</span>
+                            <strong id="passDieCount" class="text-emerald">621</strong>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-chip legend-fail"></span>
+                            <span>FAIL Chips (Defect):</span>
+                            <strong id="failDieCount" class="text-rose">27</strong>
+                        </div>
+                        <div class="legend-item">
+                            <i class="fa-solid fa-chart-pie" style="color:var(--cyan); font-size:12px;"></i>
+                            <span>Die Yield:</span>
+                            <strong id="dieYieldCount" class="text-cyan">95.8%</strong>
+                        </div>
                     </div>
                 </div>
 

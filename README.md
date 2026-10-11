@@ -183,7 +183,7 @@ Evaluated across **121,719 test wafers** from the WM-811K benchmark dataset:
 ## 👥 Project Team & Contributions
 
 * **Institution:** Saintgits College of Engineering (Autonomous)
-* **Program:** B.Tech Mini Project Phase - 1 Zeroth Review
+* **Program:** B.Tech Mini Project Final Internal Review
 * **Supervisor:** Er. Justin Mathew, Assistant Professor, Department of Computer Science & Engineering
 
 ### Team Members:

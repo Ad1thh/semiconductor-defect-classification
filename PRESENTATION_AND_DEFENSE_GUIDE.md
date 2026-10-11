@@ -2,7 +2,7 @@
 ## End-to-End Deep Learning Pipeline for Automated Semiconductor Wafer Defect Classification with ONNX Optimization
 
 * **Institution:** Saintgits College of Engineering (Autonomous)
-* **Program:** B.Tech Mini Project Phase - 1 Zeroth Review
+* **Program:** B.Tech Mini Project Final Internal Review
 * **Supervisor:** Er. Justin Mathew, Assistant Professor, Department of Computer Science & Engineering
 * **Project Team:**
   1. **ADITHYAN B** (Roll No: MGP23EVLSI001)
